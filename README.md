@@ -1,6 +1,7 @@
 # RATKBD-Linux
 
-> **Suite de configuration native et haute performance sous Linux pour le clavier à effet Hall MAD60HE et la souris VXE R1 Pro.**
+> **A native, high-performance Linux configuration suite for the MAD60HE Hall effect keyboard and the VXE R1 Pro mouse.**
+
 
 [![Linux](https://img.shields.io/badge/Platform-Linux-blue?logo=linux)](https://www.linux.org)
 [![C/C++](https://img.shields.io/badge/Language-C%2FC++-orange?logo=c%2B%2B)](https://en.wikipedia.org/wiki/C%2B%2B)
@@ -11,99 +12,129 @@
 
 ---
 
-## 🚀 Présentation
+## 🚀 Overview
 
-**RATKBD-Linux** est un utilitaire natif en C/C++ ultra-léger et sans dépendance, conçu pour libérer tout le potentiel de tes périphériques haute performance sous Linux, sans passer par les configurateurs web propriétaires, les wrappers Electron ou les services cloud.
+**RATKBD-Linux** is an ultra-lightweight, dependency-free native C/C++ utility designed to unlock the full potential of your high-performance peripherals under Linux, eliminating the need for proprietary web configurators, Electron wrappers, or cloud services.
 
-Grâce à une rétro-ingénierie complète des protocoles HID propriétaires utilisés par ces matériels, OpenMAD-Linux te donne un accès instantané à tes paramètres directement depuis ton terminal ou via un backend natif minimaliste.
+Through complete reverse engineering of the proprietary HID protocols used by this hardware, RATKBD-Linux gives you instant access to your settings directly from your terminal or via a minimalist native backend.
 
-### Matériel pris en charge
-* **Clavier :** MAD60HE (Switches Magnétiques à Effet Hall)
-* **Souris :** VXE R1 Pro (Souris Gamer Haute Performance sans fil/filaire)
+### Supported Hardware
 
----
-
-## ✨ Fonctionnalités
-
-### ⌨️ Clavier MAD60HE
-* **Éclairage RGB par touche :** Contrôle total des zones d'éclairage, animations personnalisées et profils de luminosité.
-* **Points d'actionnement dynamiques :** Ajuste finement la distance d'activation des touches à la volée.
-* **Rapid Trigger (RT) :** Déclenchement ultra-réactif au relâchement des touches pour un avantage compétitif maximal en jeu.
-* **Gestion des profils :** Sauvegarde et bascule entre plusieurs configurations matérielles instantanément.
-
-### 🖱️ Souris VXE R1 Pro
-* **Paliers DPI :** Niveaux DPI personnalisés et commutation précise des paliers.
-* **Ajustement du taux de rapport (Polling Rate) :** Contrôle fin des fréquences pour optimiser la latence.
-* **Assignation de macros :** Lie et exécute des séquences de touches ou de boutons de manière native.
-* **Suivi de la batterie et de l'état :** Rapports de télémétrie en temps réel directement depuis le firmware.
+* **Keyboard:** MAD60HE (Magnetic Hall Effect Switches)
+* **Mouse:** VXE R1 Pro (High-Performance Wired/Wireless Gaming Mouse)
 
 ---
 
-## 🛠️ Stack Technique & Architecture
+## ✨ Features
 
-* **Langage :** Pur C & C++ (compilé pour une efficacité maximale et une empreinte mémoire minime).
-* **Communication :** Communication HID brute directe (`libusb` / interface noyau HID) en contournant les couches d'abstraction lourdes.
-* **Zéro superflu :** Pas d'Electron, pas de Node.js, aucune dépendance navigateur — juste de l'exécution native et rapide sous Linux.
+### ⌨️ MAD60HE Keyboard
+
+* **Per-Key RGB Lighting:** Full control over lighting zones, custom animations, and brightness profiles.
+* **Dynamic Actuation Points:** Fine-tune key activation distances on the fly.
+* **Rapid Trigger (RT):** Ultra-responsive key release triggers for maximum competitive advantage in gaming.
+* **Profile Management:** Save and switch between multiple hardware configurations instantly.
+
+### 🖱️ VXE R1 Pro Mouse
+
+* **DPI Stages:** Custom DPI levels and precise stage switching.
+* **Polling Rate Adjustment:** Fine control over frequencies to optimize latency.
+* **Macro Assignment:** Bind and execute key or button sequences natively.
+* **Battery & Status Tracking:** Real-time telemetry reports directly from the firmware.
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+* **Language:** Pure C & C++ (compiled for maximum efficiency and minimal memory footprint).
+* **Communication:** Direct raw HID communication (`libusb` / kernel HID interface) bypassing heavy abstraction layers.
+* **Zero Bloat:** No Electron, no Node.js, zero browser dependencies—just fast, native execution on Linux.
 
 ---
 
 ## 📦 Installation
 
-### Prérequis
-Assure-toi d'avoir les outils de compilation et les en-têtes de développement installés sur ta distribution :
+### Prerequisites
 
-* **Arch Linux / CachyOS :**
-  ```bash
-  sudo pacman -S base-devel cmake libusb
+Make sure you have the compilation tools and development headers installed on your distribution:
 
-Debian / Ubuntu / Mint :
+* **Arch Linux / CachyOS:**
+```bash
+sudo pacman -S base-devel cmake libusb
 
-    sudo apt install build-essential cmake libusb-1.0-0-dev
+```
 
-Compilation depuis les sources
-Bash
 
-# Cloner le dépôt
-git clone [https://github.com/snayzy/RATKBD-Linux.git](https://github.com/snayzy/RATKBD-Linux.git)
+* **Debian / Ubuntu / Mint:**
+```bash
+sudo apt install build-essential cmake libusb-1.0-0-dev
+
+```
+
+
+
+### Building from Source
+
+```bash
+# Clone the repository
+git clone https://github.com/snayzy/RATKBD-Linux.git
 cd RATKBD-Linux
 
-# Créer le dossier de build et compiler
+# Create build directory and compile
 mkdir build && cd build
 cmake ..
 make -j$(nproc)
 
-🔌 Configuration des règles Udev
+```
 
-Puisque cet outil communique directement avec les points de terminaison HID bruts, tu as besoin des permissions appropriées pour accéder aux périphériques sans être obligé de tourner en root.
+### 🔌 Udev Rules Configuration
 
-    Copie le fichier de règles udev fourni :
-    Bash
+Since this tool communicates directly with raw HID endpoints, you need the appropriate permissions to access devices without running as root.
 
-    sudo cp 99-openmad.rules /etc/udev/rules.d/
+1. Copy the provided udev rules file:
+```bash
+sudo cp 99-openmad.rules /etc/udev/rules.d/
 
-    Recharge et applique les règles udev :
-    Bash
+```
 
-    sudo udevadm control --reload-rules
-    sudo udevadm trigger
 
-⚡ Exemples d'utilisation
-Configurer l'actionnement et le Rapid Trigger du clavier
-Bash
+2. Reload and apply the udev rules:
+```bash
+sudo udevadm control --reload-rules
+sudo udevadm trigger
 
-# Définir le point d'actionnement global à 0.2 mm avec le Rapid Trigger activé
-openmad-cli keyboard --actuation 0.2 --rapid-trigger on
+```
 
-Ajuster les DPI et le taux de rapport de la souris
-Bash
 
-# Configurer la VXE R1 Pro à 1600 DPI et un taux de rapport de 1000Hz
-openmad-cli mouse --dpi 1600 --polling 1000
 
-🤝 Contribution
+---
 
-Les contributions, notes de rétro-ingénierie, dumps de protocoles et pull requests sont les bienvenus ! Si tu possèdes un matériel compatible ou que tu souhaites aider à étendre le support à d'autres switches magnétiques ou souris gaming, n'hésite pas à ouvrir une issue ou une PR.
-📜 Licence
+## ⚡ Usage Examples
+
+### Configure Keyboard Actuation and Rapid Trigger
+
+```bash
+# Set global actuation point to 0.2 mm with Rapid Trigger enabled
+ratkbd-cli keyboard --actuation 0.2 --rapid-trigger on
+
+```
+
+### Adjust Mouse DPI and Polling Rate
+
+```bash
+# Configure the VXE R1 Pro to 1600 DPI and a 1000Hz polling rate
+ratkbd-cli mouse --dpi 1600 --polling 1000
+
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions, reverse-engineering notes, protocol dumps, and pull requests are very welcome! If you own compatible hardware or want to help extend support to other magnetic switches or gaming mice, feel free to open an issue or a PR.
+
+---
+
+## 📜 License
 
 Copyright (c) 2026 SNAYZY (N0CTRACE)
 
