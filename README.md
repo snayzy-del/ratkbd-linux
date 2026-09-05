@@ -6,6 +6,7 @@
 [![C/C++](https://img.shields.io/badge/Language-C%2FC++-orange?logo=c%2B%2B)](https://en.wikipedia.org/wiki/C%2B%2B)
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Active-success)]()
+[![Python](https://img.shields.io/badge/Language-pyhthon-purple?logo=python)](https://fr.wikipedia.org/wiki/Python)
 
 ---
 
