@@ -6,7 +6,7 @@
 [![Linux](https://img.shields.io/badge/Platform-Linux-blue?logo=linux)](https://www.linux.org)
 [![C/C++](https://img.shields.io/badge/Language-C%2FC++-orange?logo=c%2B%2B)](https://en.wikipedia.org/wiki/C%2B%2B)
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Active-success)]()
+[![Status](https://img.shields.io/badge/Status-in_dev-success)]()
 [![Python](https://img.shields.io/badge/Language-pyhthon-purple?logo=python)](https://fr.wikipedia.org/wiki/Python)
 ![stars](https://img.shields.io/badge/stars-0-yellow?style=flat-square&logo=github)
 
