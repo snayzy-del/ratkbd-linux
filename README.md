@@ -7,6 +7,7 @@
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Active-success)]()
 [![Python](https://img.shields.io/badge/Language-pyhthon-purple?logo=python)](https://fr.wikipedia.org/wiki/Python)
+![stars](https://img.shields.io/badge/stars-0-yellow?style=flat-square&logo=github)
 
 ---
 
