@@ -56,8 +56,7 @@ Assure-toi d'avoir les outils de compilation et les en-têtes de développement 
   ```bash
   sudo pacman -S base-devel cmake libusb
 
-    Debian / Ubuntu / Mint :
-    Bash
+Debian / Ubuntu / Mint :
 
     sudo apt install build-essential cmake libusb-1.0-0-dev
 
