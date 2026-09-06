@@ -21,7 +21,6 @@ int kbd_get_protocol_version(const kbd_handle_t *kbd, uint16_t *version)
                                    response, TIMEOUT_MS);
     if (rc != 0) return rc;
 
-    /* octets 1-2 de la reponse, big-endian */
     *version = ((uint16_t)response[1] << 8) | response[2];
     return 0;
 }
@@ -76,10 +75,7 @@ int kbd_set_dead_zone(const kbd_handle_t *kbd,
                        uint16_t press_hundredths_mm,
                        uint16_t lift_hundredths_mm)
 {
-    /* Attention : cette commande est en little-endian, contrairement
-     * a kbd_set_actuation_point / kbd_set_rapid_trigger qui sont en
-     * big-endian. Confirme empiriquement (voir notes de reverse
-     * engineering du projet). */
+
     uint8_t p_lo = (uint8_t)(press_hundredths_mm & 0xFF);
     uint8_t p_hi = (uint8_t)(press_hundredths_mm >> 8);
     uint8_t l_lo = (uint8_t)(lift_hundredths_mm & 0xFF);
