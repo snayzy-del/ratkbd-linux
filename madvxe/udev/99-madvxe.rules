@@ -1,0 +1,5 @@
+# Regle udev pour le clavier MAD60HE (VID:PID 373b:1054)
+# A copier dans /etc/udev/rules.d/ puis :
+#   sudo udevadm control --reload-rules
+#   sudo udevadm trigger
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373b", ATTRS{idProduct}=="1054", MODE="0666"
