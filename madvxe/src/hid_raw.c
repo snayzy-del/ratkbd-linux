@@ -1,9 +1,4 @@
-/*
- * hid_raw.c — communication directe avec /dev/hidrawX, sans dependre
- * du backend libusb de hidapi (qui ne remplit pas usage_page/usage
- * sous Linux). Portage C du script Python raw_hid_direct.py, valide
- * manuellement sur le MAD60HE (VIA protocol v9).
- */
+
 #include "hid_raw.h"
 
 #include <dirent.h>
@@ -16,10 +11,6 @@
 
 #define SYSFS_HIDRAW_DIR "/sys/class/hidraw"
 
-/* Parcourt un report descriptor HID (format "short items") et renvoie
- * 1 si la paire (usage_page, usage) apparait juste avant une
- * Collection (tag 0xA0), ce qui signale une interface applicative
- * top-level -- exactement le pattern de l'interface QMK Raw HID. */
 static int descriptor_matches(const uint8_t *desc, size_t len,
                                uint16_t usage_page, uint16_t usage)
 {
@@ -42,11 +33,11 @@ static int descriptor_matches(const uint8_t *desc, size_t len,
             value |= ((long)desc[i + 1 + b]) << (8 * b);
         }
 
-        if (tag == 0x04) {          /* Usage Page (global) */
+        if (tag == 0x04) {        
             current_usage_page = value;
-        } else if (tag == 0x08) {   /* Usage (local) */
+        } else if (tag == 0x08) {   
             pending_usage = value;
-        } else if (tag == 0xA0) {   /* Collection */
+        } else if (tag == 0xA0) {   
             if (current_usage_page == usage_page && pending_usage == usage) {
                 return 1;
             }
@@ -57,7 +48,7 @@ static int descriptor_matches(const uint8_t *desc, size_t len,
     return 0;
 }
 
-/* Lit HID_ID=<bus>:<vid>:<pid> depuis un fichier uevent sysfs. */
+
 static int parse_uevent_ids(const char *uevent_path, uint16_t *vid, uint16_t *pid)
 {
     FILE *f = fopen(uevent_path, "r");
@@ -155,7 +146,7 @@ int hid_raw_send_command(const char *device_path,
     int ready = select(fd + 1, &readfds, NULL, NULL, &tv);
     if (ready <= 0) {
         close(fd);
-        return -2; /* timeout ou erreur select */
+        return -2; 
     }
 
     ssize_t n = read(fd, response, HID_RAW_REPORT_LENGTH);
